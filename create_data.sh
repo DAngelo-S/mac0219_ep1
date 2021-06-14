@@ -31,9 +31,15 @@ N_THREADS=("1"
 	   "32"
 )
 
-for S in $SIZE; do
-	for T in $N_THREADS; do
+i=0
+while [ $i -ne ${SIZE[@]} ]; do
+	S=${SIZE[$i]}
+	j=0
+	while [ $j -ne ${N_THREADS[@]} ]; do
+		T=${N_THREADS[$j]}
 		./report_generator.sh $NUM_TESTS $T $S
 		mv Reports Data/Reports_T"$T"_S"$S"
+		let "j=j+1"
 	done
+	let "i=i+1"
 done
